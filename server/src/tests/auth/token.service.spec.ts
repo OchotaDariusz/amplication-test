@@ -40,3 +40,14 @@ describe("Testing the TokenServiceBase", () => {
     });
   });
 });
+missing", () => {
+      const result = tokenServiceBase.createToken({
+        id: VALID_ID,
+        username: VALID_CREDENTIALS.username,
+        //@ts-ignore
+        password: null,
+      });
+      return expect(result).rejects.toBe(INVALID_PASSWORD_ERROR);
+    });
+  });
+});

@@ -19,8 +19,9 @@ import { ApiNestedQuery } from "../../decorators/api-nested-query.decorator";
 import * as nestAccessControl from "nest-access-control";
 import * as defaultAuthGuard from "../../auth/defaultAuth.guard";
 import { UserService } from "../user.service";
-import { AclValidateRequestInterceptor } from "../../interceptors/aclValidateRequest.interceptor";
+import { Public } from "../../decorators/public.decorator";
 import { AclFilterResponseInterceptor } from "../../interceptors/aclFilterResponse.interceptor";
+import { AclValidateRequestInterceptor } from "../../interceptors/aclValidateRequest.interceptor";
 import { UserCreateInput } from "./UserCreateInput";
 import { UserWhereInput } from "./UserWhereInput";
 import { UserWhereUniqueInput } from "./UserWhereUniqueInput";
@@ -35,14 +36,9 @@ export class UserControllerBase {
     protected readonly service: UserService,
     protected readonly rolesBuilder: nestAccessControl.RolesBuilder
   ) {}
-  @common.UseInterceptors(AclValidateRequestInterceptor)
+  @Public()
   @common.Post()
   @swagger.ApiCreatedResponse({ type: User })
-  @nestAccessControl.UseRoles({
-    resource: "User",
-    action: "create",
-    possession: "any",
-  })
   @swagger.ApiForbiddenResponse({
     type: errors.ForbiddenException,
   })
@@ -51,6 +47,7 @@ export class UserControllerBase {
       data: data,
       select: {
         createdAt: true,
+        email: true,
         firstName: true,
         id: true,
         lastName: true,
@@ -79,6 +76,7 @@ export class UserControllerBase {
       ...args,
       select: {
         createdAt: true,
+        email: true,
         firstName: true,
         id: true,
         lastName: true,
@@ -108,6 +106,7 @@ export class UserControllerBase {
       where: params,
       select: {
         createdAt: true,
+        email: true,
         firstName: true,
         id: true,
         lastName: true,
@@ -146,6 +145,7 @@ export class UserControllerBase {
         data: data,
         select: {
           createdAt: true,
+          email: true,
           firstName: true,
           id: true,
           lastName: true,
@@ -183,6 +183,7 @@ export class UserControllerBase {
         where: params,
         select: {
           createdAt: true,
+          email: true,
           firstName: true,
           id: true,
           lastName: true,

@@ -13,7 +13,3 @@ export class HealthServiceBase {
     }
   }
 }
-eturn false;
-    }
-  }
-}

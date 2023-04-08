@@ -15,7 +15,7 @@
     "role": "user",
     "resource": "User",
     "action": "update:any",
-    "attributes": "*,!email,!roles,!updatedAt,!createdAt,!id"
+    "attributes": "*,!roles,!updatedAt,!createdAt,!id"
   },
   {
     "role": "admin",
